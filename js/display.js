@@ -1,5 +1,10 @@
 import { deleteStudentByStudentId } from "./api.js";
 
+/**
+ * Функция отображения данных о студентах в виде html-таблицы
+ * @param {string} tableID идентификатор таблицы
+ * @param {any[]} studentsData список с данными о студентах
+ */
 export function displayStudentsData(tableID, studentsData) {
   const table = document.getElementById(tableID);
   const tbody = table.querySelector('tbody');
@@ -11,16 +16,44 @@ export function displayStudentsData(tableID, studentsData) {
   })
 }
 
+/**
+ * Функция для отображения сообщения о загрузке данных
+ */
 export function showLoadingMessage() {
   const loadingMessage = document.getElementById('loading-data-message');
   loadingMessage.style.display = 'block';
 }
 
+/**
+ * Функция для скрытия сообщения о загрузке данных
+ */
 export function hideLoadingMessage() {
   const loadingMessage = document.getElementById('loading-data-message');
   loadingMessage.style.display = 'none';
 }
 
+/**
+ * Функция для отображения сообщения об ошибке
+ */
+export function showErrorMessage(message) {
+  const errorMessage = document.getElementById('error-message');
+  errorMessage.innerHTML = `<p>${message}</p>`
+  errorMessage.style.display = 'block'
+}
+
+/**
+ * Функция для скрытия сообщения об ошибке
+ */
+export function hideErrorMessage() {
+  const errorMessage = document.getElementById('error-message');
+  errorMessage.style.display = 'none'
+}
+
+/**
+ * Преобразование объекта Student в строку html-таблицы
+ * @param {any} studentData информация о студенте
+ * @returns Строку html-таблицы, заполненную информацией о студенте
+ */
 function createTableRow(studentData) {
   const tr = document.createElement('tr');
 
@@ -55,17 +88,23 @@ function createTableRow(studentData) {
   const deleteButtonTd = document.createElement('td');
   const button = document.createElement('button');
   button.textContent = 'Удалить'
-  button.addEventListener('click', () => {
-    deleteStudentByStudentId(studentData.studentId)
-      .then(() => {
-        tr.remove()
-      })
-      .catch((err) => {
-        console.error("Произошла ошибка во время удаления: " + err)
-      })
-  })
+  button.addEventListener('click', () => onStudentDelete(tr, studentData))
   deleteButtonTd.appendChild(button)
   tr.appendChild(deleteButtonTd);
 
   return tr;
+}
+
+/**
+ * Обработчик удаления студента и строки о нём
+ * @param {string} tableRow Строка, которую нужно удалить
+ * @param {any} studentData Информация о студенте, которого нужно удалить
+ */
+function onStudentDelete(tableRow, studentData) {
+  try {
+    deleteStudentByStudentId(studentData.studentId)
+    tableRow.remove()
+  } catch (e) {
+    showErrorMessage(e.message)
+  }
 }

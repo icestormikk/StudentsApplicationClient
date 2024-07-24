@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Student Application - Client</title>
+  </head>
+  <body>
+    <div id="error-message" class="message" style="display: none;">
+      <p>Произошла неизвестная ошибка</p>
+    </div>
+
+    <div id="loading-data-message" class="message" style="display: none;">
+      <p>Загружаю данные...</p>
+    </div>
+
+    <div>
+      <button id="get-students-button">Получить список студентов</button>
+      <button id="add-student-button">Добавить студента</button>
+    </div>
+
+    <form id="add-student-form" method="post" style="display: none;">
+      <label for="firstname">
+        Имя студента
+        <input type="text" name="firstname" id="firstname" required>
+      </label>
+      <label for="lastname">
+        Фамилия студента
+        <input type="text" name="lastname" id="lastname" required>
+      </label>
+      <label for="patronymic">
+        Отчество студента
+        <input type="text" name="patronymic" id="patronymic">
+      </label>
+      <label for="birthday">
+        Дата рождения студента
+        <input type="date" name="birthday" id="birthday" required>
+      </label>
+      <label for="groupId">
+        Номер группы
+        <input type="number" name="groupId" id="groupId" required>
+      </label>
+      <label for="studentId">
+        Уникальный номер студента
+        <input type="number" name="studentId" id="studentId" required>
+      </label>
+      <button type="submit">Отправить</button>
+    </form>
+    
+    <table id="students-data-table">
+      <thead>
+          <tr>
+              <th>Id</th>
+              <th>Имя</th>
+              <th>Фамилия</th>
+              <th>Отчество</th>
+              <th>Дата рождения</th>
+              <th>Номер группы</th>
+              <th>Уникальный номер студента</th>
+              <th></th>
+          </tr>
+      </thead>
+      <tbody>
+
+      </tbody>
+  </table>
+    
+    <script type="module" src="js/scripts.js"></script>
+  </body>
+</html>

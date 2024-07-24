@@ -1,0 +1,38 @@
+.message {
+  border: 1px solid gray;
+  border-radius: 4px;
+  padding: 4px 10px;
+  margin: 4px 0px;
+  font-size: 18px;
+}
+#error-message {
+  border: 1px solid red;
+  color: red;
+}
+
+#students-data-table {
+  width: 100%;
+  border-spacing: 0px;
+  border-collapse: collapse;
+}
+
+#students-data-table td, #students-data-table th {
+  border: 1px solid black;
+}
+
+#get-students-button {
+  margin: 10px 0px;
+}
+
+#add-student-form {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  padding: 10px;
+}
+#add-student-form label {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0px;
+}

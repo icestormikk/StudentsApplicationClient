@@ -1,16 +1,18 @@
+import { Student } from "./classes/student.js";
+
 // Адрес сервера, на который направляются запросы
 const url = 'http://localhost:8080/students'
 
 /**
  * Получение с сервера списка из всех студентов
- * @returns Список студентов, информация о которых есть на сервере
+ * @returns {Promise<Student[]>} Список студентов, информация о которых есть на сервере
  */
 export async function getAllStudents() {
   const response = await fetch(url)
 
   if (!response.ok) {
     const error = await response.json();
-      throw new Error(`Произошла ошибка во время получения списка студентов: ${error.message || response.statusText}`)
+    throw new Error(`Произошла ошибка во время получения списка студентов: ${error.message || response.statusText}`)
   }
 
   return response.json();
@@ -18,15 +20,15 @@ export async function getAllStudents() {
 
 /**
  * Добавление нового студента в БД на сервере
- * @param {any} studentData Информация о новом студенте
- * @returns Новосозданный объект Student, полученный от сервера
+ * @param {Student} student Информация о новом студенте
+ * @returns {Promise<Student[]>} Новосозданный объект Student, полученный от сервера
  */
-export async function addStudent(studentData) {
+export async function addStudent(student) {
   const response = await fetch(
     url, 
     { 
       method: 'POST', 
-      body: JSON.stringify(studentData), 
+      body: JSON.stringify(student), 
       headers: {
         'Accept': 'application/json, text/plain',
         'Content-Type': 'application/json;charset=UTF-8'

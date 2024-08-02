@@ -1,16 +1,17 @@
 import { deleteStudentByStudentId } from "./api.js";
+import { Student } from "./classes/student.js";
 
 /**
  * Функция отображения данных о студентах в виде html-таблицы
  * @param {string} tableID идентификатор таблицы
- * @param {any[]} studentsData список с данными о студентах
+ * @param {Student[]} students список с данными о студентах
  */
-export function displayStudentsData(tableID, studentsData) {
+export function displayStudentsData(tableID, students) {
   const table = document.getElementById(tableID);
   const tbody = table.querySelector('tbody');
   tbody.innerHTML = '';
 
-  studentsData.forEach((student) => {
+  students.forEach((student) => {
     const row = createTableRow(student);
     tbody.appendChild(row);
   })
@@ -51,38 +52,38 @@ export function hideErrorMessage() {
 
 /**
  * Преобразование объекта Student в строку html-таблицы
- * @param {any} studentData информация о студенте
+ * @param {Student} student информация о студенте
  * @returns Строку html-таблицы, заполненную информацией о студенте
  */
-function createTableRow(studentData) {
+function createTableRow(student) {
   const tr = document.createElement('tr');
 
   const idTd = document.createElement('td');
-  idTd.textContent = studentData.id;
+  idTd.textContent = student.id;
   tr.appendChild(idTd);
 
   const firstnameTd = document.createElement('td');
-  firstnameTd.textContent = studentData.firstname;
+  firstnameTd.textContent = student.firstname;
   tr.appendChild(firstnameTd);
 
   const lastnameTd = document.createElement('td');
-  lastnameTd.textContent = studentData.lastname;
+  lastnameTd.textContent = student.lastname;
   tr.appendChild(lastnameTd);
 
   const patronymicTd = document.createElement('td');
-  patronymicTd.textContent = studentData.patronymic;
+  patronymicTd.textContent = student.patronymic;
   tr.appendChild(patronymicTd);
 
   const birthdayTd = document.createElement('td');
-  birthdayTd.textContent = studentData.birthday;
+  birthdayTd.textContent = student.birthday;
   tr.appendChild(birthdayTd);
 
   const groupIdTd = document.createElement('td');
-  groupIdTd.textContent = studentData.groupId;
+  groupIdTd.textContent = student.group_id;
   tr.appendChild(groupIdTd);
 
   const studentIdTd = document.createElement('td');
-  studentIdTd.textContent = studentData.studentId;
+  studentIdTd.textContent = student.student_id;
   tr.appendChild(studentIdTd);
 
   const deleteButtonTd = document.createElement('td');
@@ -98,11 +99,11 @@ function createTableRow(studentData) {
 /**
  * Обработчик удаления студента и строки о нём
  * @param {string} tableRow Строка, которую нужно удалить
- * @param {any} studentData Информация о студенте, которого нужно удалить
+ * @param {Student} student Информация о студенте, которого нужно удалить
  */
-function onStudentDelete(tableRow, studentData) {
+function onStudentDelete(tableRow, student) {
   try {
-    deleteStudentByStudentId(studentData.studentId)
+    deleteStudentByStudentId(student.student_id)
     tableRow.remove()
   } catch (e) {
     showErrorMessage(e.message)

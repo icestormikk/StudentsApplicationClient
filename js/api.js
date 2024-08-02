@@ -52,6 +52,6 @@ export async function deleteStudentByStudentId(id) {
   
   if (!response.ok) {
     const error = await response.json();
-    throw new Error(`Во время удаления объекта с student_id = ${id} произошла ошибка: ${error.message || response.statusText}`)
+    throw new Error(`Во время удаления объекта с studentId = ${id} произошла ошибка: ${error.message || response.statusText}`)
   }
 }

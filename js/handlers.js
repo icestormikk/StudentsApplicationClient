@@ -37,8 +37,8 @@ export async function onSubmitAddStudentFormClick() {
   const form = document.getElementById("add-student-form")
   const data = Object.fromEntries(new FormData(form));
 
-  data['group_id'] = Number(data['group_id']);
-  data['student_id'] = Number(data['student_id']);
+  data['groupId'] = Number(data['groupId']);
+  data['studentId'] = Number(data['studentId']);
 
   try {
     await addStudent(data)

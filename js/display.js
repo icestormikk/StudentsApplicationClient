@@ -79,17 +79,17 @@ function createTableRow(student) {
   tr.appendChild(birthdayTd);
 
   const groupIdTd = document.createElement('td');
-  groupIdTd.textContent = student.group_id;
+  groupIdTd.textContent = student.groupId;
   tr.appendChild(groupIdTd);
 
   const studentIdTd = document.createElement('td');
-  studentIdTd.textContent = student.student_id;
+  studentIdTd.textContent = student.studentId;
   tr.appendChild(studentIdTd);
 
   const deleteButtonTd = document.createElement('td');
   const button = document.createElement('button');
   button.textContent = 'Удалить'
-  button.addEventListener('click', () => onStudentDelete(tr, studentData))
+  button.addEventListener('click', () => onStudentDelete(tr, student))
   deleteButtonTd.appendChild(button)
   tr.appendChild(deleteButtonTd);
 
@@ -103,7 +103,7 @@ function createTableRow(student) {
  */
 function onStudentDelete(tableRow, student) {
   try {
-    deleteStudentByStudentId(student.student_id)
+    deleteStudentByStudentId(student.studentId)
     tableRow.remove()
   } catch (e) {
     showErrorMessage(e.message)
